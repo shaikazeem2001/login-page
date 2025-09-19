@@ -1,21 +1,31 @@
-const express=require('express');
-const app=express();
-const cors=require('cors')
+const express = require("express");
+const cors = require("cors");
+const connectdb = require("./config/db");
+const userRoutes = require("./routes/user.routes");
 
+const app = express();
 
-app.use(cors());
-app.use(express.json())
+// Connect to MongoDB
+connectdb();
 
-app.get('/',(req,res)=>{
-    res.send('backedn is running')
-})
+// Middleware
+app.use(cors({
+  origin: "http://localhost:5180",  // frontend origin
+  methods: ["GET", "POST"],
+  credentials: true
+}));
+app.use(express.json());
 
-app.get('/login',(req,res)=>{
-    res.send('login page')
-})
+// Test route
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+});
 
-app.get('/signup',(req,res)=>{
-    res.send('sign up page')
-})
+// User routes (signup + login)
+app.use("/api", userRoutes);
 
-app.listen(3000)
+// Start server
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
