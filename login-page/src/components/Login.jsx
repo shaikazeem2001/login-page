@@ -20,7 +20,7 @@ const Login = () => {
     console.log("Submitting login form:", formData);
 
     try {
-      const res = await axios.post("http://localhost:3000/api/login", formData);
+      const res = await axios.post("http://localhost:4200/api/login", formData);
       console.log("Login response:", res.data);
 
       // Save user in localStorage
