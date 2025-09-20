@@ -21,7 +21,7 @@ const Signup = () => {
     console.log("Submitting signup form:", formData);
 
     try {
-      const res = await axios.post("http://localhost:4200/api/signup", formData);
+      const res = await axios.post("/api/signup", formData);
       console.log("Signup response:", res.data);
 
       // Save user in localStorage
